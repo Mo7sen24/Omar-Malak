@@ -2244,12 +2244,27 @@ setInterval(
    SOUND BUTTON
    ========================================================= */
 
-$('#snd').onclick=
-    e=>
-        e.target.textContent=
-            e.target.textContent=='🔊'
-                ?'🔇'
-                :'🔊';
+/* Wedding music controls */
+
+const music = $('#weddingMusic');
+const soundButton = $('#snd');
+
+soundButton.textContent = '🔊';
+
+soundButton.addEventListener('click', async () => {
+    try {
+        if (music.paused) {
+            await music.play();
+            soundButton.textContent = '🔊';
+        } else {
+            music.pause();
+            soundButton.textContent = '🔇';
+        }
+    } catch (error) {
+        console.error('Could not play the music:', error);
+        alert('Please tap the sound button again to play the music.');
+    }
+});
 
 </script>
 
