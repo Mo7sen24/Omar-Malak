@@ -400,10 +400,24 @@ p{
     display:block
 }
 
+.card input:focus,
+.card textarea:focus{
+    outline:none;
+    border-color:#a47e7a;
+    box-shadow:0 0 0 2px rgba(164,126,122,.12)
+}
+
 .opt{
     text-align:center;
     margin-bottom:8px;
-    cursor:pointer
+    cursor:pointer;
+    transition:.2s ease;
+    user-select:none
+}
+
+.opt:hover{
+    border-color:#a47e7a;
+    transform:translateY(-1px)
 }
 
 .opt.on{
@@ -421,7 +435,49 @@ p{
     background:#a47e7a;
     color:#fff;
     font:15px var(--t);
-    cursor:pointer
+    cursor:pointer;
+    transition:.2s ease
+}
+
+.go:hover{
+    background:#916b68
+}
+
+.go:disabled{
+    cursor:not-allowed;
+    opacity:.7
+}
+
+.rsvp-success{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    background:#e8f5e9;
+    color:#2e7d32;
+    text-align:center;
+    font-size:14px;
+    line-height:1.5
+}
+
+.rsvp-success.show{
+    display:block
+}
+
+.rsvp-error{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    background:#fbe9e7;
+    color:#b71c1c;
+    text-align:center;
+    font-size:13px;
+    line-height:1.5
+}
+
+.rsvp-error.show{
+    display:block
 }
 
 /* thanks */
@@ -565,7 +621,7 @@ p{
     </div>
 
 
-    <!-- NEW PALACE / VENUE ILLUSTRATION -->
+    <!-- PALACE / VENUE ILLUSTRATION -->
     <svg
         class="fig rv"
         width="320"
@@ -579,35 +635,27 @@ p{
         style="margin:10px auto 0"
     >
 
-        <!-- Ground -->
         <path d="M18 158H302"/>
         <path d="M38 164H282"/>
 
-        <!-- Main building -->
         <path d="M48 158V78H272V158"/>
         <path d="M40 78H280"/>
 
-        <!-- Main roof -->
         <path d="M42 78L160 34L278 78"/>
         <path d="M53 75L160 40L267 75"/>
 
-        <!-- Central pediment -->
         <path d="M112 78L160 53L208 78"/>
         <path d="M122 74L160 57L198 74"/>
 
-        <!-- Central upper window -->
         <path d="M148 75V63H172V75"/>
         <path d="M160 63V75"/>
 
-        <!-- Left wing roof -->
         <path d="M30 78V68L65 53L100 68V78"/>
         <path d="M38 68L65 57L92 68"/>
 
-        <!-- Right wing roof -->
         <path d="M220 78V68L255 53L290 68V78"/>
         <path d="M228 68L255 57L282 68"/>
 
-        <!-- Columns -->
         <path d="M66 82V158"/>
         <path d="M76 82V158"/>
         <path d="M102 82V158"/>
@@ -618,22 +666,18 @@ p{
         <path d="M244 82V158"/>
         <path d="M254 82V158"/>
 
-        <!-- Column capitals -->
         <path d="M63 88H79"/>
         <path d="M99 88H115"/>
         <path d="M205 88H221"/>
         <path d="M241 88H257"/>
 
-        <!-- Central entrance -->
         <path d="M137 158V112Q160 91 183 112V158"/>
         <path d="M145 158V115Q160 101 175 115V158"/>
         <path d="M160 103V158"/>
 
-        <!-- Main door -->
         <path d="M151 158V121Q160 113 169 121V158"/>
         <circle cx="165" cy="137" r="1.5"/>
 
-        <!-- Left windows -->
         <rect x="52" y="98" width="20" height="27" rx="1"/>
         <path d="M62 98V125"/>
         <path d="M52 111.5H72"/>
@@ -642,7 +686,6 @@ p{
         <path d="M92 98V125"/>
         <path d="M82 111.5H102"/>
 
-        <!-- Right windows -->
         <rect x="218" y="98" width="20" height="27" rx="1"/>
         <path d="M228 98V125"/>
         <path d="M218 111.5H238"/>
@@ -651,7 +694,6 @@ p{
         <path d="M258 98V125"/>
         <path d="M248 111.5H268"/>
 
-        <!-- Upper central windows -->
         <rect x="126" y="84" width="18" height="20" rx="1"/>
         <path d="M135 84V104"/>
         <path d="M126 94H144"/>
@@ -660,7 +702,6 @@ p{
         <path d="M185 84V104"/>
         <path d="M176 94H194"/>
 
-        <!-- Balustrade -->
         <path d="M105 82H215"/>
         <path d="M108 82V90"/>
         <path d="M118 82V90"/>
@@ -675,27 +716,22 @@ p{
         <path d="M208 82V90"/>
         <path d="M105 90H215"/>
 
-        <!-- Decorative roof finial -->
         <path d="M157 53V45"/>
         <circle cx="160" cy="42" r="3"/>
 
-        <!-- Left trees -->
         <path d="M27 158V123"/>
         <path d="M20 128Q27 116 34 128"/>
         <path d="M18 137Q27 123 36 137"/>
         <path d="M16 147Q27 130 38 147"/>
 
-        <!-- Right trees -->
         <path d="M293 158V123"/>
         <path d="M286 128Q293 116 300 128"/>
         <path d="M284 137Q293 123 302 137"/>
         <path d="M282 147Q293 130 304 147"/>
 
-        <!-- Small garden lines -->
         <path d="M42 158Q50 150 58 158"/>
         <path d="M262 158Q270 150 278 158"/>
 
-        <!-- Ground details -->
         <path d="M72 164L78 158"/>
         <path d="M88 164L94 158"/>
         <path d="M226 164L232 158"/>
@@ -989,7 +1025,7 @@ p{
 
 
 <!-- RSVP -->
-<section class="cr">
+<section class="cr" id="rsvp">
 
     <div class="pill rv">
         ⓘ This form is fully customizable to your needs
@@ -1002,38 +1038,118 @@ p{
         Confirm your attendance
     </div>
 
-    <div class="card rv">
+    <form
+        id="rsvpForm"
+        class="card rv"
+        method="POST"
+        target="rsvpFrame"
+    >
 
-        <label>FULL NAME *</label>
+        <label for="rsvpName">
+            FULL NAME *
+        </label>
 
-        <input placeholder="Your name">
+        <input
+            id="rsvpName"
+            name="name"
+            type="text"
+            placeholder="Your name"
+            autocomplete="name"
+            required
+        >
 
-        <label>EMAIL (OPTIONAL)</label>
 
-        <input placeholder="your@email.com">
+        <label for="rsvpEmail">
+            EMAIL (OPTIONAL)
+        </label>
 
-        <label>WILL YOU ATTEND? *</label>
+        <input
+            id="rsvpEmail"
+            name="email"
+            type="email"
+            placeholder="your@email.com"
+            autocomplete="email"
+        >
 
-        <div class="opt">
+
+        <label>
+            WILL YOU ATTEND? *
+        </label>
+
+        <!-- hidden value sent to Google Sheets -->
+        <input
+            type="hidden"
+            id="attendance"
+            name="attendance"
+        >
+
+
+        <div
+            class="opt"
+            data-value="Yes, I'll be there!"
+            role="button"
+            tabindex="0"
+        >
             Yes, I'll be there!
         </div>
 
-        <div class="opt">
+
+        <div
+            class="opt"
+            data-value="No, I can't make it"
+            role="button"
+            tabindex="0"
+        >
             No, I can't make it
         </div>
 
-        <label>MESSAGE FOR THE COUPLE (OPTIONAL)</label>
+
+        <label for="rsvpMessage">
+            MESSAGE FOR THE COUPLE (OPTIONAL)
+        </label>
 
         <textarea
+            id="rsvpMessage"
+            name="message"
             rows="3"
             placeholder="Write us a few words..."
         ></textarea>
 
-        <button class="go">
+
+        <button
+            type="submit"
+            class="go"
+            id="rsvpButton"
+        >
             ✈ Confirm
         </button>
 
-    </div>
+
+        <div
+            id="rsvpSuccess"
+            class="rsvp-success"
+        >
+            ✓ Thank you! Your RSVP has been received.
+        </div>
+
+
+        <div
+            id="rsvpError"
+            class="rsvp-error"
+        >
+            Please enter your name and select Yes or No.
+        </div>
+
+    </form>
+
+
+    <!-- Hidden iframe prevents leaving the invitation page -->
+    <iframe
+        name="rsvpFrame"
+        id="rsvpFrame"
+        style="display:none;"
+        title="RSVP submission"
+    ></iframe>
 
 </section>
 
@@ -1080,7 +1196,208 @@ const $=(s,e=document)=>e.querySelector(s);
 const $$=(s,e=document)=>[...e.querySelectorAll(s)];
 
 
-/* curtain open */
+/* =========================================================
+   RSVP - GOOGLE SHEETS
+   ========================================================= */
+
+const RSVP_URL =
+"https://script.google.com/macros/s/AKfycbzPz3_zFgxXWI4_EmzrBJf_n42WfVwRUX6rBr8H23MROsnw_Me9kYA74F62Rz3Fcev8vg/exec";
+
+
+const rsvpForm = $('#rsvpForm');
+const rsvpName = $('#rsvpName');
+const rsvpEmail = $('#rsvpEmail');
+const rsvpMessage = $('#rsvpMessage');
+const attendance = $('#attendance');
+
+const rsvpButton = $('#rsvpButton');
+const rsvpSuccess = $('#rsvpSuccess');
+const rsvpError = $('#rsvpError');
+
+const rsvpFrame = $('#rsvpFrame');
+
+const rsvpOptions =
+    $$('.opt', rsvpForm);
+
+
+/* Connect form to Google Apps Script */
+
+rsvpForm.action = RSVP_URL;
+
+
+/* =========================================================
+   YES / NO SELECTION
+   ========================================================= */
+
+rsvpOptions.forEach(option => {
+
+    option.addEventListener('click', () => {
+
+        rsvpOptions.forEach(item => {
+            item.classList.remove('on');
+        });
+
+        option.classList.add('on');
+
+        attendance.value =
+            option.dataset.value;
+
+        rsvpError.classList.remove('show');
+
+    });
+
+
+    /* Keyboard support */
+
+    option.addEventListener('keydown', e => {
+
+        if(
+            e.key === 'Enter' ||
+            e.key === ' '
+        ){
+
+            e.preventDefault();
+
+            option.click();
+
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   RSVP SUBMISSION
+   ========================================================= */
+
+let rsvpSubmitted = false;
+
+
+rsvpForm.addEventListener('submit', function(e){
+
+    rsvpError.classList.remove('show');
+
+
+    /* Check name */
+
+    if(!rsvpName.value.trim()){
+
+        e.preventDefault();
+
+        rsvpError.textContent =
+            'Please enter your full name.';
+
+        rsvpError.classList.add('show');
+
+        rsvpName.focus();
+
+        return;
+
+    }
+
+
+    /* Check attendance */
+
+    if(!attendance.value){
+
+        e.preventDefault();
+
+        rsvpError.textContent =
+            'Please select Yes or No.';
+
+        rsvpError.classList.add('show');
+
+        return;
+
+    }
+
+
+    /* Prevent double submission */
+
+    if(rsvpSubmitted){
+
+        e.preventDefault();
+
+        return;
+
+    }
+
+
+    rsvpSubmitted = true;
+
+
+    /* Loading */
+
+    rsvpButton.disabled = true;
+
+    rsvpButton.textContent =
+        'Sending...';
+
+});
+
+
+/* =========================================================
+   GOOGLE RESPONSE
+   ========================================================= */
+
+rsvpFrame.addEventListener('load', function(){
+
+    if(!rsvpSubmitted)
+        return;
+
+
+    setTimeout(() => {
+
+        rsvpSuccess.classList.add('show');
+
+        rsvpButton.textContent =
+            '✓ Confirmed';
+
+        rsvpButton.disabled = true;
+
+
+        /*
+         * Clear the form after successful submission
+         */
+
+        rsvpName.value = '';
+        rsvpEmail.value = '';
+        rsvpMessage.value = '';
+        attendance.value = '';
+
+
+        rsvpOptions.forEach(option => {
+            option.classList.remove('on');
+        });
+
+
+        /*
+         * Allow another RSVP after a few seconds
+         */
+
+        setTimeout(() => {
+
+            rsvpButton.disabled = false;
+
+            rsvpButton.textContent =
+                '✈ Confirm';
+
+            rsvpSuccess.classList.remove('show');
+
+            rsvpSubmitted = false;
+
+        }, 5000);
+
+
+    }, 500);
+
+});
+
+
+/* =========================================================
+   CURTAIN OPEN
+   ========================================================= */
 
 const YS=[
     0,12,25,38,50,58,65,72,76,80,90,100
@@ -1413,7 +1730,9 @@ setTimeout(
 );
 
 
-/* reveal on scroll */
+/* =========================================================
+   REVEAL ON SCROLL
+   ========================================================= */
 
 const io=
     new IntersectionObserver(
@@ -1433,7 +1752,9 @@ $$('.rv').forEach(
 );
 
 
-/* scratch coins */
+/* =========================================================
+   SCRATCH COINS
+   ========================================================= */
 
 let done=0;
 
@@ -1579,7 +1900,9 @@ $$('.d').forEach(
 );
 
 
-/* confetti */
+/* =========================================================
+   CONFETTI
+   ========================================================= */
 
 function win(){
 
@@ -1694,7 +2017,9 @@ function win(){
 }
 
 
-/* countdown */
+/* =========================================================
+   COUNTDOWN
+   ========================================================= */
 
 const T=
     new Date(
@@ -1739,7 +2064,9 @@ setInterval(
 );
 
 
-/* wavy ribbon frame */
+/* =========================================================
+   WAVY RIBBON FRAME
+   ========================================================= */
 
 (
     function(){
@@ -1854,7 +2181,9 @@ setInterval(
 )();
 
 
-/* zigzag edge for thank-you */
+/* =========================================================
+   ZIGZAG EDGE
+   ========================================================= */
 
 (
     function(){
@@ -1907,7 +2236,9 @@ setInterval(
 )();
 
 
-/* sound button */
+/* =========================================================
+   SOUND BUTTON
+   ========================================================= */
 
 $('#snd').onclick=
     e=>
