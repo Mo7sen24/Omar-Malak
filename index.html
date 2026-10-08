@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<title>Omar &amp; Malak</title>
+<title>Omar &amp; Malak | Engagement Invitation</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
 
@@ -80,7 +80,10 @@ p{
     transform:none
 }
 
-/* hero */
+/* =========================================================
+   HERO
+   ========================================================= */
+
 #hero{
     height:calc(min(100vw,480px)*5/3 + 56px);
     padding:0;
@@ -197,7 +200,8 @@ p{
     background:rgba(40,15,10,.8);
     color:#fff;
     cursor:pointer;
-    z-index:5
+    z-index:10;
+    font-size:15px
 }
 
 #scr{
@@ -227,7 +231,10 @@ p{
     }
 }
 
-/* scratch */
+/* =========================================================
+   SCRATCH DATE
+   ========================================================= */
+
 .dates{
     display:flex;
     justify-content:space-between;
@@ -276,7 +283,10 @@ p{
     z-index:20
 }
 
-/* countdown */
+/* =========================================================
+   COUNTDOWN
+   ========================================================= */
+
 .cd{
     display:flex;
     gap:12px;
@@ -312,7 +322,10 @@ p{
     line-height:1.7
 }
 
-/* menu */
+/* =========================================================
+   ENGAGEMENT CARD
+   ========================================================= */
+
 .menu{
     position:relative;
     margin:0 auto;
@@ -358,7 +371,10 @@ p{
     margin-top:14px
 }
 
-/* form */
+/* =========================================================
+   RSVP FORM
+   ========================================================= */
+
 .pill{
     display:inline-flex;
     gap:6px;
@@ -480,7 +496,10 @@ p{
     display:block
 }
 
-/* thanks */
+/* =========================================================
+   THANK YOU
+   ========================================================= */
+
 #ty{
     background:var(--white)
 }
@@ -497,7 +516,10 @@ p{
     clip-path:var(--zz)
 }
 
-/* map button */
+/* =========================================================
+   MAP BUTTON
+   ========================================================= */
+
 .map-link{
     display:inline-block;
     margin-top:16px;
@@ -506,7 +528,39 @@ p{
     background:#a47e7a;
     color:#fff;
     text-decoration:none;
-    font-size:13px;
+    font-size:13px
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:360px){
+
+    .dates{
+        gap:7px
+    }
+
+    .d{
+        width:78px;
+        height:78px
+    }
+
+    .cd{
+        gap:7px
+    }
+
+    .cd div{
+        width:60px;
+        height:60px
+    }
+
+    .menu{
+        transform:scale(.92);
+        transform-origin:top center;
+        margin-bottom:-35px
+    }
+
 }
 </style>
 </head>
@@ -515,7 +569,10 @@ p{
 
 <main>
 
-<!-- HERO -->
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
 <section id="hero">
 
     <div class="txt">
@@ -525,8 +582,9 @@ p{
             style="position:absolute;top:33%;width:100%;font-size:9px;color:#a98a6c;line-height:1.5"
         >
             You are cordially invited to<br>
-            celebrate the wedding of
+            celebrate the engagement of
         </div>
+
 
         <div
             class="sc"
@@ -537,29 +595,48 @@ p{
             Malak
         </div>
 
+
         <p
             class="cap"
             style="position:absolute;top:79%;left:28%;width:44%;line-height:1.8;font-size:8.5px"
         >
-            We would like to invite you to celebrate with us the most special day of our lives.
-            It would be an honor to have you present at this important moment.
+            We would love for you to join us as we celebrate
+            our engagement and the beginning of a beautiful new chapter together.
         </p>
 
     </div>
+
 
     <div class="k" id="kl">
         <i></i>
     </div>
 
+
     <div class="k" id="kr">
         <i></i>
     </div>
 
-   <audio id="weddingMusic" loop preload="auto">
-    <source src="song.mp3" type="audio/mpeg">
-</audio>
 
-<button id="snd" aria-label="Play or pause music">🔊</button>
+    <!-- MUSIC -->
+
+    <audio
+        id="weddingMusic"
+        loop
+        preload="auto"
+        autoplay
+    >
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <button
+        id="snd"
+        aria-label="Play or pause music"
+        type="button"
+    >
+        🔊
+    </button>
+
 
     <div id="scr" class="cap">
         Scroll
@@ -569,16 +646,24 @@ p{
 </section>
 
 
-<!-- DATE REVEAL -->
+<!-- =========================================================
+     DATE REVEAL
+     ========================================================= -->
+
 <section class="cr" id="rev">
 
     <div class="sc rv">
-        Reveal
+        A Special Date
     </div>
 
-    <div class="cap rv" style="margin-top:10px">
-        Scratch to discover the date
+
+    <div
+        class="cap rv"
+        style="margin-top:10px"
+    >
+        Scratch to reveal our engagement date
     </div>
+
 
     <div class="dates rv">
 
@@ -586,9 +671,11 @@ p{
             16
         </div>
 
+
         <div class="d">
             Oct
         </div>
+
 
         <div class="d">
             2026
@@ -596,36 +683,54 @@ p{
 
     </div>
 
-    <div class="sc" id="gm" style="font-size:28px">
-        We're getting married!
+
+    <div
+        class="sc"
+        id="gm"
+        style="font-size:28px"
+    >
+        We're getting engaged!
     </div>
 
 </section>
 
 
-<!-- COUNTDOWN + VENUE -->
+<!-- =========================================================
+     COUNTDOWN + VENUE
+     ========================================================= -->
+
 <section>
 
     <div class="sc rv">
         Countdown
     </div>
 
-    <div class="cd rv" id="cd"></div>
 
-    <p class="rv" style="font-size:13px;margin-top:-6px">
-        until the big day
+    <div
+        class="cd rv"
+        id="cd"
+    ></div>
+
+
+    <p
+        class="rv"
+        style="font-size:13px;margin-top:-6px"
+    >
+        until our engagement celebration
     </p>
+
 
     <div
         class="cap rv"
         style="margin-top:70px;line-height:1.8"
     >
-        The celebration will take place<br>
+        Join us for an unforgettable evening<br>
         at
     </div>
 
 
-    <!-- PALACE / VENUE ILLUSTRATION -->
+    <!-- VENUE ILLUSTRATION -->
+
     <svg
         class="fig rv"
         width="320"
@@ -751,13 +856,19 @@ p{
         Andalusia Hull
     </h2>
 
+
     <div class="addr rv">
         Andalusia Hull
     </div>
 
-    <p class="rv" style="font-size:21px">
+
+    <p
+        class="rv"
+        style="font-size:21px"
+    >
         October 16, 2026
     </p>
+
 
     <p
         class="rv"
@@ -765,6 +876,7 @@ p{
     >
         7:00 PM
     </p>
+
 
     <a
         class="map-link rv"
@@ -775,17 +887,21 @@ p{
         📍 View Location on Google Maps
     </a>
 
+
     <div
         class="sc rv"
         style="margin-top:28px"
     >
-        Reception to Follow
+        We can't wait to see you!
     </div>
 
 </section>
 
 
-<!-- MENU -->
+<!-- =========================================================
+     ENGAGEMENT CARD
+     ========================================================= -->
+
 <section class="cr">
 
     <div class="menu rv">
@@ -795,6 +911,7 @@ p{
             id="frame"
             viewBox="0 0 320 560"
         ></svg>
+
 
         <svg
             style="position:absolute;left:112px;top:6px"
@@ -808,30 +925,76 @@ p{
             <path d="M48 28C30 6 6 6 8 22s30 12 40 6c10 6 34 10 40-6S66 6 48 28zM48 28l-12 20M48 28l12 20"/>
         </svg>
 
+
         <div class="in2">
-
-            <h6>APERITIVO</h6>
-            <span>Selección de antipasti toscanos</span>
-            <em>Bruschetta, crostini &amp; affettati misti</em>
-
-            <h6>PRIMO</h6>
-            <span>Risotto al tartufo nero di Norcia</span>
-            <em>con parmigiano reggiano 24 mesi</em>
-
-            <h6>SECONDO</h6>
-            <span>Filetto di manzo alla griglia</span>
-            <em>con salsa al vino rosso e verdure di stagione</em>
-
-            <h6>DOLCE</h6>
-            <span>Torta nuziale con crema di mascarpone</span>
-            <em>e frutti di bosco freschi</em>
 
             <div
                 class="sc"
-                style="font-size:19px;margin-top:12px"
+                style="font-size:26px;margin-top:10px"
             >
-                Vini della Tenuta
+                A New Chapter
             </div>
+
+
+            <h6>
+                OUR STORY
+            </h6>
+
+            <span>
+                Two hearts, one beautiful beginning
+            </span>
+
+            <em>
+                and a journey we are excited to share
+            </em>
+
+
+            <h6>
+                THE MOMENT
+            </h6>
+
+            <span>
+                October 16, 2026
+            </span>
+
+            <em>
+                A day we will always remember
+            </em>
+
+
+            <h6>
+                THE CELEBRATION
+            </h6>
+
+            <span>
+                An evening filled with love &amp; happiness
+            </span>
+
+            <em>
+                surrounded by our favorite people
+            </em>
+
+
+            <h6>
+                WITH LOVE
+            </h6>
+
+            <span>
+                Omar &amp; Malak
+            </span>
+
+            <em>
+                celebrating the beginning of forever
+            </em>
+
+
+            <div
+                class="sc"
+                style="font-size:19px;margin-top:24px"
+            >
+                Forever Starts Here
+            </div>
+
 
             <svg
                 width="190"
@@ -853,7 +1016,10 @@ p{
 </section>
 
 
-<!-- DRESS CODE -->
+<!-- =========================================================
+     DRESS CODE
+     ========================================================= -->
+
 <section>
 
     <div
@@ -863,6 +1029,7 @@ p{
         Dress Code
     </div>
 
+
     <svg
         class="fig rv"
         width="300"
@@ -870,6 +1037,7 @@ p{
         viewBox="0 0 300 190"
         style="margin:22px auto"
     >
+
         <g fill="#222">
 
             <circle cx="35" cy="26" r="9"/>
@@ -883,11 +1051,32 @@ p{
 
         </g>
 
-        <circle cx="90" cy="30" r="9" fill="#a86a3a"/>
-        <path d="M76 42h28l22 128H62z" fill="#8c9a5b"/>
 
-        <circle cx="200" cy="30" r="9" fill="#b0603a"/>
-        <path d="M188 42h24l18 128h-60z" fill="#d44a56"/>
+        <circle
+            cx="90"
+            cy="30"
+            r="9"
+            fill="#a86a3a"
+        />
+
+        <path
+            d="M76 42h28l22 128H62z"
+            fill="#8c9a5b"
+        />
+
+
+        <circle
+            cx="200"
+            cy="30"
+            r="9"
+            fill="#b0603a"
+        />
+
+        <path
+            d="M188 42h24l18 128h-60z"
+            fill="#d44a56"
+        />
+
 
         <path
             d="M255 42h28l8 128h-44z"
@@ -897,16 +1086,20 @@ p{
 
     </svg>
 
+
     <p class="rv">
-        We invite you to dress elegantly and formally to celebrate this special day with us.
+        We invite you to dress elegantly and formally
+        as we celebrate this beautiful occasion together.
     </p>
+
 
     <h3
         class="rv"
         style="font-weight:400;font-size:26px;margin:34px 0 14px"
     >
-        Formal Attire
+        Elegant Attire
     </h3>
+
 
     <div
         class="sc rv"
@@ -918,12 +1111,16 @@ p{
 </section>
 
 
-<!-- GIFTS -->
+<!-- =========================================================
+     YOUR PRESENCE
+     ========================================================= -->
+
 <section class="cr">
 
     <div class="cap rv">
-        Wedding Registry
+        A Little Note
     </div>
+
 
     <svg
         class="fig rv"
@@ -935,21 +1132,27 @@ p{
         stroke-width="1.6"
         style="margin:14px auto 4px"
     >
-        <path d="M8 52q4-22 28-24h26q18 4 22 24l-8 8H16zM26 30l6-14h22l6 14M34 60l-4 14M58 60l4 14M40 16l-4-10M52 16l4-10"/>
+
+        <path d="M8 52q4-22 28-24h26q18 4 22 24l-8 8H16zM26 30l6-14h22l6 14M34 60l-4 14M58 60l4 14"/>
         <circle cx="26" cy="56" r="7"/>
         <circle cx="64" cy="56" r="7"/>
+
     </svg>
+
 
     <h2
         class="rv"
         style="font-weight:400;font-size:40px;margin-bottom:18px"
     >
-        Gifts
+        Your Presence
     </h2>
 
+
     <p class="rv">
-        Your presence is the best gift we could receive. However, if you wish to contribute to our new life together, you can do so via bank transfer.
+        Your presence, love, and warm wishes
+        are more than enough to make our engagement celebration special.
     </p>
+
 
     <div
         class="sc rv"
@@ -958,82 +1161,111 @@ p{
         With all our love
     </div>
 
+
     <div class="cap rv">
-        Bank Details
+        Omar &amp; Malak
     </div>
 
+
     <div class="box rv">
-        ACCOUNT HOLDER: OMAR &amp; MALAK<br>
-        IBAN: ES00 0000 0000 0000 0000 0000<br>
-        REFERENCE: Omar &amp; Malak Wedding
+        Thank you for being part of this beautiful
+        beginning and for sharing this special moment with us.
     </div>
 
 </section>
 
 
-<!-- TRANSPORT -->
+<!-- =========================================================
+     GETTING THERE
+     ========================================================= -->
+
 <section>
 
     <div class="cap rv">
         How to get there
     </div>
 
+
     <h2
         class="rv"
         style="font-weight:400;font-size:42px;margin:6px 0 18px"
     >
-        Transport
+        The Venue
     </h2>
 
+
     <p class="rv">
-        We have organized buses from the center of Florence to the villa so you can enjoy the celebration without worries.
+        Join us at Andalusia Hull for an evening
+        filled with love, happiness, and beautiful memories.
     </p>
+
 
     <div
         class="cap rv"
         style="margin-top:44px"
     >
-        Bus Departure
+        Venue
     </div>
+
 
     <div
         class="rv"
         style="font-size:21px;margin:10px 0;line-height:1.4"
     >
-        Piazza della Signoria<br>
-        16:00h
+        Andalusia Hull
     </div>
+
 
     <div
         class="cap rv"
         style="margin-top:34px"
     >
-        Return to Florence
+        Date &amp; Time
     </div>
+
 
     <div
         class="rv"
-        style="font-size:21px;margin:10px 0"
+        style="font-size:21px;margin:10px 0;line-height:1.6"
     >
-        02:00h
+        October 16, 2026<br>
+        7:00 PM
     </div>
+
+
+    <a
+        class="map-link rv"
+        href="https://maps.app.goo.gl/gPgeBZyTjKWRtdrv5?g_st=iw"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        📍 Open Google Maps
+    </a>
+
 
     <div
         class="sc rv"
         style="font-size:25px;margin-top:26px"
     >
-        Please indicate in your RSVP if you need transport
+        See you there!
     </div>
 
 </section>
 
 
-<!-- RSVP -->
-<section class="cr" id="rsvp">
+<!-- =========================================================
+     RSVP
+     ========================================================= -->
+
+<section
+    class="cr"
+    id="rsvp"
+>
 
     <div class="pill rv">
-        ⓘ This form is fully customizable to your needs
+        ⓘ Please confirm your attendance
     </div>
+
 
     <div
         class="sc rv"
@@ -1041,6 +1273,7 @@ p{
     >
         Confirm your attendance
     </div>
+
 
     <form
         id="rsvpForm"
@@ -1052,6 +1285,7 @@ p{
         <label for="rsvpName">
             FULL NAME *
         </label>
+
 
         <input
             id="rsvpName"
@@ -1067,6 +1301,7 @@ p{
             EMAIL (OPTIONAL)
         </label>
 
+
         <input
             id="rsvpEmail"
             name="email"
@@ -1080,7 +1315,7 @@ p{
             WILL YOU ATTEND? *
         </label>
 
-        <!-- hidden value sent to Google Sheets -->
+
         <input
             type="hidden"
             id="attendance"
@@ -1109,8 +1344,9 @@ p{
 
 
         <label for="rsvpMessage">
-            MESSAGE FOR THE COUPLE (OPTIONAL)
+            MESSAGE FOR OMAR &amp; MALAK (OPTIONAL)
         </label>
+
 
         <textarea
             id="rsvpMessage"
@@ -1125,7 +1361,7 @@ p{
             class="go"
             id="rsvpButton"
         >
-            ✈ Confirm
+            💌 Confirm RSVP
         </button>
 
 
@@ -1147,7 +1383,6 @@ p{
     </form>
 
 
-    <!-- Hidden iframe prevents leaving the invitation page -->
     <iframe
         name="rsvpFrame"
         id="rsvpFrame"
@@ -1158,7 +1393,10 @@ p{
 </section>
 
 
-<!-- THANK YOU -->
+<!-- =========================================================
+     THANK YOU
+     ========================================================= -->
+
 <section id="ty">
 
     <div class="tyc rv">
@@ -1172,9 +1410,12 @@ p{
                 Thank You
             </div>
 
+
             <p style="margin:18px 0 24px">
-                For joining us on this special day. Your presence is the best gift we could receive.
+                Thank you for being part of our story
+                and for sharing in the happiness of our engagement.
             </p>
+
 
             <div
                 class="sc"
@@ -1191,13 +1432,14 @@ p{
 
 </main>
 
+
 <canvas id="cf"></canvas>
 
 
 <script>
 
-const $=(s,e=document)=>e.querySelector(s);
-const $$=(s,e=document)=>[...e.querySelectorAll(s)];
+const $ = (s,e=document) => e.querySelector(s);
+const $$ = (s,e=document) => [...e.querySelectorAll(s)];
 
 
 /* =========================================================
@@ -1220,8 +1462,7 @@ const rsvpError = $('#rsvpError');
 
 const rsvpFrame = $('#rsvpFrame');
 
-const rsvpOptions =
-    $$('.opt', rsvpForm);
+const rsvpOptions = $$('.opt',rsvpForm);
 
 
 /* Connect form to Google Apps Script */
@@ -1243,15 +1484,12 @@ rsvpOptions.forEach(option => {
 
         option.classList.add('on');
 
-        attendance.value =
-            option.dataset.value;
+        attendance.value = option.dataset.value;
 
         rsvpError.classList.remove('show');
 
     });
 
-
-    /* Keyboard support */
 
     option.addEventListener('keydown', e => {
 
@@ -1283,8 +1521,6 @@ rsvpForm.addEventListener('submit', function(e){
     rsvpError.classList.remove('show');
 
 
-    /* Check name */
-
     if(!rsvpName.value.trim()){
 
         e.preventDefault();
@@ -1301,8 +1537,6 @@ rsvpForm.addEventListener('submit', function(e){
     }
 
 
-    /* Check attendance */
-
     if(!attendance.value){
 
         e.preventDefault();
@@ -1317,8 +1551,6 @@ rsvpForm.addEventListener('submit', function(e){
     }
 
 
-    /* Prevent double submission */
-
     if(rsvpSubmitted){
 
         e.preventDefault();
@@ -1330,8 +1562,6 @@ rsvpForm.addEventListener('submit', function(e){
 
     rsvpSubmitted = true;
 
-
-    /* Loading */
 
     rsvpButton.disabled = true;
 
@@ -1361,10 +1591,6 @@ rsvpFrame.addEventListener('load', function(){
         rsvpButton.disabled = true;
 
 
-        /*
-         * Clear the form after successful submission
-         */
-
         rsvpName.value = '';
         rsvpEmail.value = '';
         rsvpMessage.value = '';
@@ -1376,25 +1602,21 @@ rsvpFrame.addEventListener('load', function(){
         });
 
 
-        /*
-         * Allow another RSVP after a few seconds
-         */
-
         setTimeout(() => {
 
             rsvpButton.disabled = false;
 
             rsvpButton.textContent =
-                '✈ Confirm';
+                '💌 Confirm RSVP';
 
             rsvpSuccess.classList.remove('show');
 
             rsvpSubmitted = false;
 
-        }, 5000);
+        },5000);
 
 
-    }, 500);
+    },500);
 
 });
 
@@ -1403,63 +1625,77 @@ rsvpFrame.addEventListener('load', function(){
    CURTAIN OPEN
    ========================================================= */
 
-const YS=[
+const YS = [
     0,12,25,38,50,58,65,72,76,80,90,100
 ];
 
-const K0=YS.map(()=>50);
 
-const K1=YS.map(
-    y=>50-Math.max(
+const K0 = YS.map(() => 50);
+
+
+const K1 = YS.map(
+    y => 50 - Math.max(
         2,
-        25*Math.pow(
-            y<=63 ? y/63 : (100-y)/37,
+        25 * Math.pow(
+            y <= 63
+                ? y / 63
+                : (100-y) / 37,
             1.3
         )
     )
 );
 
-const K2=[
+
+const K2 = [
     38,35,30,22,12,5,0,3,6,12,25,34
 ];
 
-const K3=[
+
+const K3 = [
     34,33,31,28,23,15,7,0,3,7,9,10
 ];
 
-const cr=(a,b,c,d,t)=>
-    .5*(
-        2*b+
-        (-a+c)*t+
-        (2*a-5*b+4*c-d)*t*t+
+
+const cr = (a,b,c,d,t) =>
+    .5 * (
+        2*b +
+        (-a+c)*t +
+        (2*a-5*b+4*c-d)*t*t +
         (-a+3*b-3*c+d)*t*t*t
     );
 
-const lerp=(A,B,p)=>
+
+const lerp = (A,B,p) =>
     A.map(
-        (v,i)=>v+(B[i]-v)*p
+        (v,i) => v + (B[i]-v)*p
     );
+
 
 function edge(t){
 
-    const e=.5-Math.cos(Math.PI*t)/2;
+    const e = .5 - Math.cos(Math.PI*t)/2;
 
     let k;
 
-    k=e<.3
-        ?lerp(K0,K1,e/.3)
-        :e<.62
-            ?lerp(K1,K2,(e-.3)/.32)
-            :lerp(K2,K3,(e-.62)/.38);
+    k = e < .3
+        ? lerp(K0,K1,e/.3)
+        : e < .62
+            ? lerp(K1,K2,(e-.3)/.32)
+            : lerp(K2,K3,(e-.62)/.38);
 
-    const o=[];
-    const n=k.length;
 
-    const g=i=>
-        k[Math.min(
-            n-1,
-            Math.max(0,i)
-        )];
+    const o = [];
+    const n = k.length;
+
+
+    const g = i =>
+        k[
+            Math.min(
+                n-1,
+                Math.max(0,i)
+            )
+        ];
+
 
     for(
         let i=0;
@@ -1469,11 +1705,11 @@ function edge(t){
 
         for(
             let q=0;
-            q<(i==n-2?9:8);
+            q<(i==n-2 ? 9 : 8);
             q++
         ){
 
-            const u=q/8;
+            const u = q/8;
 
             o.push([
                 Math.max(
@@ -1486,7 +1722,7 @@ function edge(t){
                         u
                     )
                 ),
-                YS[i]+
+                YS[i] +
                 (YS[i+1]-YS[i])*u
             ]);
 
@@ -1494,44 +1730,52 @@ function edge(t){
 
     }
 
+
     return [o,e];
 
 }
 
 
-const N=11;
-const cvs=[];
+const N = 11;
+const cvs = [];
 
 
 function fabric(side){
 
-    const K=$('#k'+side);
+    const K = $('#k'+side);
 
-    const c=document.createElement('canvas');
+    const c = document.createElement('canvas');
 
-    const d=Math.min(
+    const d = Math.min(
         2,
-        devicePixelRatio||1
+        devicePixelRatio || 1
     );
 
-    const W=K.clientWidth;
-    const H=K.clientHeight;
 
-    c.width=W*d;
-    c.height=H*d;
+    const W = K.clientWidth;
+    const H = K.clientHeight;
 
-    c.style.cssText=
+
+    c.width = W*d;
+    c.height = H*d;
+
+
+    c.style.cssText =
         'position:absolute;inset:0;width:100%;height:100%' +
-        (side=='r'
-            ?';transform:scaleX(-1)'
-            :''
+        (
+            side === 'r'
+                ? ';transform:scaleX(-1)'
+                : ''
         );
+
 
     K.appendChild(c);
 
-    const x=c.getContext('2d');
+
+    const x = c.getContext('2d');
 
     x.scale(d,d);
+
 
     cvs.push({
         x,
@@ -1544,7 +1788,7 @@ function fabric(side){
 
 function lines(e){
 
-    const s=Math.min(
+    const s = Math.min(
         1,
         Math.max(
             0,
@@ -1552,10 +1796,12 @@ function lines(e){
         )
     );
 
-    const f=s*s*(3-2*s);
+
+    const f = s*s*(3-2*s);
+
 
     cvs.forEach(
-        ({x,W,H})=>{
+        ({x,W,H}) => {
 
             x.clearRect(
                 0,
@@ -1564,7 +1810,9 @@ function lines(e){
                 H
             );
 
-            x.lineCap='round';
+
+            x.lineCap = 'round';
+
 
             for(
                 let i=0;
@@ -1572,10 +1820,11 @@ function lines(e){
                 i++
             ){
 
-                const a=i/N*W*.34;
-                const kn=i/N*W*.1;
-                const b=i/N*W*.14;
-                const tc=i/N*W*.5+3;
+                const a = i/N*W*.34;
+                const kn = i/N*W*.1;
+                const b = i/N*W*.14;
+                const tc = i/N*W*.5+3;
+
 
                 [
                     [
@@ -1591,12 +1840,13 @@ function lines(e){
                         0
                     ]
                 ].forEach(
-                    ([_ ,col,lw,off])=>{
+                    ([_ ,col,lw,off]) => {
 
                         x.beginPath();
 
-                        x.strokeStyle=col;
-                        x.lineWidth=lw;
+                        x.strokeStyle = col;
+                        x.lineWidth = lw;
+
 
                         for(
                             let y=0;
@@ -1604,26 +1854,29 @@ function lines(e){
                             y+=5
                         ){
 
-                            const yn=y/H;
+                            const yn = y/H;
 
-                            const cl=
-                                tc+
+
+                            const cl =
+                                tc +
                                 Math.sin(
                                     yn*9+i*1.7
-                                )*3+
+                                )*3 +
                                 Math.sin(
                                     yn*23+i
                                 )*1.2;
 
+
                             let op;
+
 
                             if(yn<.72){
 
-                                const u=yn/.72;
+                                const u = yn/.72;
 
-                                op=
-                                    a+
-                                    (kn-a)*
+                                op =
+                                    a +
+                                    (kn-a) *
                                     Math.pow(
                                         u,
                                         1.15
@@ -1631,31 +1884,34 @@ function lines(e){
 
                             }else{
 
-                                op=
-                                    kn+
-                                    (b-kn)*
+                                op =
+                                    kn +
+                                    (b-kn) *
                                     ((yn-.72)/.28);
 
                             }
 
-                            const xx=
-                                cl+
-                                (op-cl)*f+
-                                off+
+
+                            const xx =
+                                cl +
+                                (op-cl)*f +
+                                off +
                                 Math.sin(
                                     yn*11+i*2.1
                                 )*2.2*f;
 
+
                             x[
                                 y
-                                ?'lineTo'
-                                :'moveTo'
+                                    ? 'lineTo'
+                                    : 'moveTo'
                             ](
                                 xx,
                                 y
                             );
 
                         }
+
 
                         x.stroke();
 
@@ -1676,27 +1932,32 @@ fabric('r');
 
 function drawK(t){
 
-    const [p,e]=edge(t);
+    const [p,e] = edge(t);
 
-    const L=
+
+    const L =
         p.map(
-            ([x,y])=>
+            ([x,y]) =>
                 x.toFixed(2)+'% '+
                 y.toFixed(1)+'%'
         ).join(',');
 
-    const R=
+
+    const R =
         p.map(
-            ([x,y])=>
+            ([x,y]) =>
                 (100-x).toFixed(2)+'% '+
                 y.toFixed(1)+'%'
         ).join(',');
 
-    $('#kl').style.clipPath=
+
+    $('#kl').style.clipPath =
         `polygon(0 0,${L},0 100%)`;
 
-    $('#kr').style.clipPath=
+
+    $('#kr').style.clipPath =
         `polygon(100% 0,${R},100% 100%)`;
+
 
     lines(e);
 
@@ -1707,21 +1968,25 @@ drawK(0);
 
 
 setTimeout(
-    ()=>{
+    () => {
+
         $('#hero').classList.add('open');
 
-        const t0=performance.now();
+        const t0 = performance.now();
+
 
         (
             function f(n){
 
-                const t=
+                const t =
                     Math.min(
                         1,
                         (n-t0)/3000
                     );
 
+
                 drawK(t);
+
 
                 if(t<1)
                     requestAnimationFrame(f);
@@ -1738,11 +2003,11 @@ setTimeout(
    REVEAL ON SCROLL
    ========================================================= */
 
-const io=
+const io =
     new IntersectionObserver(
-        es=>
+        es =>
             es.forEach(
-                e=>
+                e =>
                     e.isIntersecting &&
                     e.target.classList.add('in')
             ),
@@ -1751,8 +2016,9 @@ const io=
         }
     );
 
+
 $$('.rv').forEach(
-    e=>io.observe(e)
+    e => io.observe(e)
 );
 
 
@@ -1760,36 +2026,44 @@ $$('.rv').forEach(
    SCRATCH COINS
    ========================================================= */
 
-let done=0;
+let done = 0;
+
 
 $$('.d').forEach(
-    d=>{
+    d => {
 
-        const c=
+        const c =
             document.createElement('canvas');
 
-        const w=84;
 
-        c.width=c.height=w*2;
+        const w = 84;
 
-        c.style.width=
-            c.style.height=
+
+        c.width = c.height = w*2;
+
+
+        c.style.width =
+            c.style.height =
             w+'px';
+
 
         d.appendChild(c);
 
-        const x=c.getContext('2d');
+
+        const x = c.getContext('2d');
 
         x.scale(2,2);
 
-        const g=
+
+        const g =
             x.createConicGradient
-            ?x.createConicGradient(
-                0,
-                42,
-                42
-            )
-            :null;
+                ? x.createConicGradient(
+                    0,
+                    42,
+                    42
+                )
+                : null;
+
 
         if(g){
 
@@ -1804,22 +2078,24 @@ $$('.d').forEach(
                 .87,
                 1
             ].forEach(
-                (s,i)=>
+                (s,i) =>
                     g.addColorStop(
                         s,
                         i%2
-                            ?'#e9c374'
-                            :'#b98a3e'
+                            ? '#e9c374'
+                            : '#b98a3e'
                     )
             );
 
-            x.fillStyle=g;
+
+            x.fillStyle = g;
 
         }else{
 
-            x.fillStyle='#d9a94f';
+            x.fillStyle = '#d9a94f';
 
         }
+
 
         x.fillRect(
             0,
@@ -1828,21 +2104,27 @@ $$('.d').forEach(
             w
         );
 
-        let dn=0;
-        let go=0;
 
-        const sc=e=>{
+        let dn = 0;
+        let go = 0;
 
-            if(!go||dn)
+
+        const sc = e => {
+
+            if(!go || dn)
                 return;
 
-            const r=
+
+            const r =
                 c.getBoundingClientRect();
 
-            x.globalCompositeOperation=
+
+            x.globalCompositeOperation =
                 'destination-out';
 
+
             x.beginPath();
+
 
             x.arc(
                 e.clientX-r.left,
@@ -1852,9 +2134,11 @@ $$('.d').forEach(
                 7
             );
 
+
             x.fill();
 
-            const p=
+
+            const p =
                 x.getImageData(
                     0,
                     0,
@@ -1862,43 +2146,59 @@ $$('.d').forEach(
                     w*2
                 ).data;
 
-            let n=0;
+
+            let n = 0;
+
 
             for(
                 let i=3;
                 i<p.length;
                 i+=64
-            )
+            ){
+
                 if(!p[i])
                     n++;
 
+            }
+
+
             if(
-                n>
+                n >
                 p.length/64*.45
             ){
 
-                dn=1;
+                dn = 1;
 
-                c.style.opacity=0;
+                c.style.opacity = 0;
 
-                if(++done==3)
+
+                if(++done === 3)
                     win();
 
             }
 
         };
 
-        c.onpointerdown=e=>{
-            go=1;
+
+        c.onpointerdown = e => {
+
+            go = 1;
+
             c.setPointerCapture(
                 e.pointerId
             );
+
             sc(e);
+
         };
 
-        c.onpointermove=sc;
 
-        c.onpointerup=()=>go=0;
+        c.onpointermove = sc;
+
+
+        c.onpointerup = () => {
+            go = 0;
+        };
 
     }
 );
@@ -1912,25 +2212,29 @@ function win(){
 
     $('#gm').classList.add('in');
 
-    const c=$('#cf');
-    const x=c.getContext('2d');
 
-    c.width=innerWidth;
-    c.height=innerHeight;
+    const c = $('#cf');
+    const x = c.getContext('2d');
 
-    const cols=[
+
+    c.width = innerWidth;
+    c.height = innerHeight;
+
+
+    const cols = [
         '#4a0d0a',
         '#6b1a14',
         '#8a5a58',
         '#3a0a08'
     ];
 
-    const P=
+
+    const P =
         Array.from(
             {
                 length:130
             },
-            ()=>({
+            () => ({
                 x:innerWidth/2,
                 y:innerHeight*.45,
                 vx:(Math.random()-.5)*16,
@@ -1943,7 +2247,9 @@ function win(){
             })
         );
 
-    let t=0;
+
+    let t = 0;
+
 
     (
         function f(){
@@ -1955,25 +2261,31 @@ function win(){
                 c.height
             );
 
+
             P.forEach(
-                p=>{
+                p => {
 
-                    p.vy+=.35;
-                    p.x+=p.vx;
-                    p.y+=p.vy;
-                    p.vx*=.99;
-                    p.r+=.15;
+                    p.vy += .35;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vx *= .99;
+                    p.r += .15;
 
-                    x.fillStyle=p.c;
+
+                    x.fillStyle = p.c;
+
 
                     x.save();
+
 
                     x.translate(
                         p.x,
                         p.y
                     );
 
+
                     x.rotate(p.r);
+
 
                     if(p.k){
 
@@ -2000,20 +2312,27 @@ function win(){
 
                     }
 
+
                     x.restore();
 
                 }
             );
 
-            if(++t<200)
+
+            if(++t<200){
+
                 requestAnimationFrame(f);
-            else
+
+            }else{
+
                 x.clearRect(
                     0,
                     0,
                     c.width,
                     c.height
                 );
+
+            }
 
         }
     )();
@@ -2025,46 +2344,54 @@ function win(){
    COUNTDOWN
    ========================================================= */
 
-const T=
+const T =
     new Date(
         '2026-10-16T19:00:00'
     );
 
+
 function tick(){
 
-    let s=
+    let s =
         Math.max(
             0,
-            (T-new Date())/1e3|0
+            Math.floor(
+                (T-new Date())/1000
+            )
         );
 
-    const v=[
-        s/86400|0,
-        s%86400/3600|0,
-        s%3600/60|0,
+
+    const v = [
+        Math.floor(s/86400),
+        Math.floor((s%86400)/3600),
+        Math.floor((s%3600)/60),
         s%60
     ];
 
-    const l=[
+
+    const l = [
         'DAYS',
         'HOURS',
         'MIN',
         'SEC'
     ];
 
-    $('#cd').innerHTML=
+
+    $('#cd').innerHTML =
         v.map(
-            (n,i)=>
+            (n,i) =>
                 `<div>${n}<small>${l[i]}</small></div>`
         ).join('');
 
 }
 
+
 tick();
+
 
 setInterval(
     tick,
-    1e3
+    1000
 );
 
 
@@ -2075,22 +2402,25 @@ setInterval(
 (
     function(){
 
-        const W=320;
-        const H=560;
-        const m=14;
+        const W = 320;
+        const H = 560;
+        const m = 14;
 
-        const pts=o=>{
 
-            let d='';
+        const pts = o => {
 
-            const seg=(
+            let d = '';
+
+
+            const seg = (
                 x1,
                 y1,
                 x2,
                 y2
-            )=>{
+            ) => {
 
-                const n=14;
+                const n = 14;
+
 
                 for(
                     let i=0;
@@ -2098,32 +2428,38 @@ setInterval(
                     i++
                 ){
 
-                    const t=i/n;
+                    const t = i/n;
 
-                    const x=
-                        x1+
+
+                    const x =
+                        x1 +
                         (x2-x1)*t;
 
-                    const y=
-                        y1+
+
+                    const y =
+                        y1 +
                         (y2-y1)*t;
 
-                    const a=
+
+                    const a =
                         Math.sin(
                             t*Math.PI*5+o
                         )*5;
 
-                    const nx=
-                        y1==y2
-                        ?0
-                        :a;
 
-                    const ny=
+                    const nx =
                         y1==y2
-                        ?a
-                        :0;
+                            ? 0
+                            : a;
 
-                    d+=
+
+                    const ny =
+                        y1==y2
+                            ? a
+                            : 0;
+
+
+                    d +=
                         (d?'L':'M')+
                         (x+nx).toFixed(1)+
                         ' '+
@@ -2133,12 +2469,14 @@ setInterval(
 
             };
 
+
             seg(
                 m+16,
                 m+8,
                 W-m-16,
                 m+8
             );
+
 
             seg(
                 W-m,
@@ -2147,12 +2485,14 @@ setInterval(
                 H-m-16
             );
 
+
             seg(
                 W-m-16,
                 H-m,
                 m+16,
                 H-m
             );
+
 
             seg(
                 m,
@@ -2161,11 +2501,14 @@ setInterval(
                 m+24
             );
 
+
             return d+'Z';
 
         };
 
-        $('#frame').innerHTML=`
+
+        $('#frame').innerHTML = `
+
             <path
                 d="${pts(0)}"
                 fill="none"
@@ -2179,6 +2522,7 @@ setInterval(
                 stroke="#c0393b"
                 stroke-width="1.2"
             />
+
         `;
 
     }
@@ -2192,44 +2536,61 @@ setInterval(
 (
     function(){
 
-        let p=[];
-        let n=9;
+        let p = [];
+        let n = 9;
+
 
         for(
             let i=0;
             i<=n;
             i++
-        )
+        ){
+
             p.push(
                 `${i/n*100}% ${i%2?0:3}%`
             );
 
+        }
+
+
         for(
             let i=0;
             i<=n;
             i++
-        )
+        ){
+
             p.push(
                 `${i%2?100:97}% ${i/n*100}%`
             );
 
-        for(
-            let i=n;
-            i>=0;
-            i--
-        )
-            p.push(
-                `${i/n*100}% ${i%2?100:97}%`
-            );
+        }
+
 
         for(
             let i=n;
             i>=0;
             i--
-        )
+        ){
+
+            p.push(
+                `${i/n*100}% ${i%2?100:97}%`
+            );
+
+        }
+
+
+        for(
+            let i=n;
+            i>=0;
+            i--
+        ){
+
             p.push(
                 `${i%2?0:3}% ${i/n*100}%`
             );
+
+        }
+
 
         $('#ty').style.setProperty(
             '--zz',
@@ -2241,30 +2602,321 @@ setInterval(
 
 
 /* =========================================================
-   SOUND BUTTON
+   MUSIC
    ========================================================= */
-
-/* Wedding music controls */
 
 const music = $('#weddingMusic');
 const soundButton = $('#snd');
 
-soundButton.textContent = '🔊';
 
-soundButton.addEventListener('click', async () => {
-    try {
-        if (music.paused) {
-            await music.play();
-            soundButton.textContent = '🔊';
-        } else {
-            music.pause();
-            soundButton.textContent = '🔇';
-        }
-    } catch (error) {
-        console.error('Could not play the music:', error);
-        alert('Please tap the sound button again to play the music.');
+/*
+ * Initial volume
+ */
+
+music.volume = 0.55;
+
+
+/*
+ * Update button
+ */
+
+function updateSoundButton(){
+
+    if(music.paused){
+
+        soundButton.textContent = '🔇';
+
+        soundButton.title = 'Play music';
+
+        soundButton.setAttribute(
+            'aria-label',
+            'Play music'
+        );
+
+    }else{
+
+        soundButton.textContent = '🔊';
+
+        soundButton.title = 'Pause music';
+
+        soundButton.setAttribute(
+            'aria-label',
+            'Pause music'
+        );
+
     }
-});
+
+}
+
+
+/*
+ * Try to start music
+ */
+
+async function playMusic(){
+
+    try{
+
+        await music.play();
+
+        updateSoundButton();
+
+        return true;
+
+    }catch(error){
+
+        /*
+         * Browser blocked autoplay.
+         * The first user interaction will try again.
+         */
+
+        updateSoundButton();
+
+        return false;
+
+    }
+
+}
+
+
+/*
+ * Autoplay attempt when page loads
+ */
+
+window.addEventListener(
+    'load',
+    () => {
+
+        /*
+         * Make sure the browser knows
+         * we want the audio to start.
+         */
+
+        music.load();
+
+        playMusic();
+
+    }
+);
+
+
+/*
+ * Sound button
+ */
+
+soundButton.addEventListener(
+    'click',
+    async e => {
+
+        /*
+         * Prevent this click from
+         * affecting other controls.
+         */
+
+        e.stopPropagation();
+
+
+        if(music.paused){
+
+            await playMusic();
+
+        }else{
+
+            music.pause();
+
+            updateSoundButton();
+
+        }
+
+    }
+);
+
+
+/*
+ * If autoplay was blocked,
+ * start music after first interaction.
+ */
+
+let musicInteractionStarted = false;
+
+
+document.addEventListener(
+    'pointerdown',
+    async event => {
+
+        if(
+            musicInteractionStarted ||
+            event.target.closest('#snd')
+        ){
+
+            return;
+
+        }
+
+
+        musicInteractionStarted = true;
+
+
+        if(music.paused){
+
+            await playMusic();
+
+        }
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+/* =========================================================
+   AUTO SCROLL
+   SPEED = 0.3 PX / FRAME
+   ========================================================= */
+
+let autoScrollStarted = false;
+let userInteracted = false;
+
+
+/*
+ * Stop auto scroll when
+ * the user interacts with the page.
+ */
+
+function stopAutoScroll(){
+
+    userInteracted = true;
+
+}
+
+
+/*
+ * Mouse wheel
+ */
+
+window.addEventListener(
+    'wheel',
+    stopAutoScroll,
+    {
+        passive:true
+    }
+);
+
+
+/*
+ * Touch
+ */
+
+window.addEventListener(
+    'touchstart',
+    stopAutoScroll,
+    {
+        passive:true
+    }
+);
+
+
+/*
+ * Mouse / pointer click
+ */
+
+window.addEventListener(
+    'pointerdown',
+    stopAutoScroll,
+    {
+        passive:true
+    }
+);
+
+
+/*
+ * Keyboard
+ */
+
+window.addEventListener(
+    'keydown',
+    stopAutoScroll
+);
+
+
+/*
+ * Start auto scroll
+ */
+
+function startAutoScroll(){
+
+    if(
+        autoScrollStarted ||
+        userInteracted
+    ){
+
+        return;
+
+    }
+
+
+    autoScrollStarted = true;
+
+
+    let position = window.scrollY;
+
+
+    function scrollPage(){
+
+        if(userInteracted)
+            return;
+
+
+        position += 0.3;
+
+
+        window.scrollTo(
+            0,
+            position
+        );
+
+
+        const maxScroll =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+
+        if(position < maxScroll){
+
+            requestAnimationFrame(
+                scrollPage
+            );
+
+        }
+
+    }
+
+
+    requestAnimationFrame(
+        scrollPage
+    );
+
+}
+
+
+/*
+ * Start auto scroll after
+ * curtain animation is finished.
+ *
+ * Curtain starts at 700ms
+ * and lasts 3000ms.
+ * Therefore ~4000ms is used.
+ */
+
+setTimeout(
+    () => {
+
+        startAutoScroll();
+
+    },
+    4000
+);
 
 </script>
 
