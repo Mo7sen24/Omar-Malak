@@ -34,7 +34,7 @@ p{line-height:1.6;font-size:15px}
 /* scratch */
 .dates{display:flex;justify-content:space-between;gap:10px;margin:34px 0 26px}
 .d{position:relative;width:84px;height:84px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
-.d canvas{position:absolute;inset:0;border-radius:50%;touch-action:none;cursor:grab;transition:opacity .8s}
+.d canvas{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;touch-action:none;cursor:grab;transition:opacity .8s;z-index:10}
 #gm{opacity:0;transition:1s .4s}#gm.in{opacity:1}
 #cf{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:20}
 /* countdown */
@@ -190,16 +190,60 @@ drawK(0);
 setTimeout(()=>{$('#hero').classList.add('open');const t0=performance.now();(function f(n){const t=Math.min(1,(n-t0)/3000);drawK(t);t<1&&requestAnimationFrame(f)})(t0)},700);
 // reveal on scroll
 const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.2});
-$$('.rv').forEach(e=>io.observe(e)); // scratch coins (Original Exact Code) let done=0; $$
-('.d').forEach(d=>{const c=document.createElement('canvas'),w=84;c.width=c.height=w*2;c.style.width=c.style.height=w+'px';d.appendChild(c);
- const x=c.getContext('2d');x.scale(2,2);
- const g=x.createConicGradient?x.createConicGradient(0,42,42):null;
- if(g){[0,.12,.25,.37,.5,.62,.75,.87,1].forEach((s,i)=>g.addColorStop(s,i%2?'#e9c374':'#b98a3e'));x.fillStyle=g}else x.fillStyle='#d9a94f';
- x.fillRect(0,0,w,w);let dn=0,go=0;
- const sc=e=>{if(!go||dn)return;const r=c.getBoundingClientRect();x.globalCompositeOperation='destination-out';x.beginPath();x.arc(e.clientX-r.left,e.clientY-r.top,13,0,7);x.fill();
-  const p=x.getImageData(0,0,w*2,w*2).data;let n=0;for(let i=3;i<p.length;i+=64)if(!p[i])n++;
-  if(n>p.length/64*.45){dn=1;c.style.opacity=0;if(++done==3)win()}};
- c.onpointerdown=e=>{go=1;c.setPointerCapture(e.pointerId);sc(e)};c.onpointermove=sc;c.onpointerup=()=>go=0;});
+$$('.rv').forEach(e=>io.observe(e));  // scratch coins - Robust Cross-Device Fix let done=0; function initScratch(){   $$
+('.d').forEach(d=>{
+    if(d.querySelector('canvas')) return;
+    const c=document.createElement('canvas');
+    c.width=168; c.height=168;
+    d.appendChild(c);
+    const x=c.getContext('2d');
+    
+    // Draw solid gold overlay
+    x.fillStyle='#d9a94f';
+    x.fillRect(0,0,168,168);
+    x.fillStyle='#c89438';
+    x.beginPath(); x.arc(84,84,65,0,Math.PI*2); x.fill();
+
+    let isScratching=false, dn=0;
+    
+    function scratch(e){
+      if(!isScratching || dn) return;
+      const r=c.getBoundingClientRect();
+      const clientX=e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY=e.touches ? e.touches[0].clientY : e.clientY;
+      const scale=168/r.width;
+      const px=(clientX-r.left)*scale;
+      const py=(clientY-r.top)*scale;
+      
+      x.globalCompositeOperation='destination-out';
+      x.beginPath();
+      x.arc(px,py,30,0,Math.PI*2);
+      x.fill();
+      
+      const p=x.getImageData(0,0,168,168).data;
+      let clearCount=0;
+      for(let i=3; i<p.length; i+=64){ if(p[i]===0) clearCount++; }
+      if(clearCount > (p.length/64)*0.4){
+        dn=1;
+        c.style.opacity='0';
+        setTimeout(()=>c.remove(), 800);
+        if(++done===3) win();
+      }
+    }
+
+    c.addEventListener('mousedown', e=>{isScratching=true; scratch(e)});
+    window.addEventListener('mousemove', scratch);
+    window.addEventListener('mouseup', ()=>{isScratching=false});
+
+    c.addEventListener('touchstart', e=>{isScratching=true; scratch(e); e.preventDefault()},{passive:false});
+    c.addEventListener('touchmove', e=>{scratch(e); e.preventDefault()},{passive:false});
+    c.addEventListener('touchend', ()=>{isScratching=false});
+  });
+}
+window.addEventListener('DOMContentLoaded', initScratch);
+window.addEventListener('load', initScratch);
+initScratch();
+
 // confetti
 function win(){$('#gm').classList.add('in');const c=$('#cf'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
  const cols=['#4a0d0a','#6b1a14','#8a5a58','#3a0a08'];
