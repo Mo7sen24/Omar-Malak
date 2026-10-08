@@ -95,7 +95,8 @@ p{
     position:absolute;
     inset:0 0 56px;
     opacity:0;
-    transition:opacity 1.6s 1.2s
+    transition:opacity 1.6s 1.2s;
+    z-index:1
 }
 
 #hero.open .txt{
@@ -106,7 +107,8 @@ p{
     position:absolute;
     top:0;
     bottom:56px;
-    width:100%
+    width:100%;
+    z-index:2
 }
 
 .k i{
@@ -162,6 +164,84 @@ p{
     )
 }
 
+/* =========================================================
+   OPEN INVITATION OVERLAY
+   ========================================================= */
+
+#openInvitation{
+    position:absolute;
+    inset:0 0 56px;
+    z-index:15;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    cursor:pointer;
+    text-align:center;
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-tap-highlight-color:transparent;
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+#openInvitation.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none
+}
+
+.open-heart{
+    font-family:Georgia,serif;
+    font-size:42px;
+    line-height:1;
+    margin-bottom:14px;
+    animation:openPulse 1.8s infinite ease-in-out;
+    text-shadow:0 2px 8px rgba(0,0,0,.3)
+}
+
+.open-title{
+    font-family:var(--s);
+    font-size:38px;
+    line-height:1;
+    margin-bottom:11px;
+    text-shadow:0 2px 8px rgba(0,0,0,.3)
+}
+
+.open-subtitle{
+    font-family:var(--t);
+    font-size:9px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    opacity:.85;
+    text-shadow:0 1px 5px rgba(0,0,0,.4)
+}
+
+.open-line{
+    width:42px;
+    height:1px;
+    background:rgba(255,255,255,.65);
+    margin:16px auto 0
+}
+
+@keyframes openPulse{
+    0%,100%{
+        transform:scale(1);
+        opacity:.8
+    }
+
+    50%{
+        transform:scale(1.12);
+        opacity:1
+    }
+}
+
+/* =========================================================
+   CURTAIN SHAPE
+   ========================================================= */
+
 #kl{
     clip-path:polygon(
         0 0,
@@ -188,6 +268,10 @@ p{
     )
 }
 
+/* =========================================================
+   SOUND BUTTON
+   ========================================================= */
+
 #snd{
     position:absolute;
     bottom:66px;
@@ -201,7 +285,12 @@ p{
     color:#fff;
     cursor:pointer;
     z-index:10;
-    font-size:15px
+    font-size:15px;
+    -webkit-tap-highlight-color:transparent
+}
+
+#snd:hover{
+    background:rgba(40,15,10,.95)
 }
 
 #scr{
@@ -211,7 +300,8 @@ p{
     font-size:10px;
     letter-spacing:.2em;
     opacity:0;
-    transition:1s 3s
+    transition:1s 3s;
+    z-index:4
 }
 
 #hero.open #scr{
@@ -561,6 +651,10 @@ p{
         margin-bottom:-35px
     }
 
+    .open-title{
+        font-size:34px
+    }
+
 }
 </style>
 </head>
@@ -607,36 +701,68 @@ p{
     </div>
 
 
+    <!-- LEFT CURTAIN -->
+
     <div class="k" id="kl">
         <i></i>
     </div>
 
+
+    <!-- RIGHT CURTAIN -->
 
     <div class="k" id="kr">
         <i></i>
     </div>
 
 
-    <!-- MUSIC -->
+    <!-- =====================================================
+         OPEN INVITATION
+         ===================================================== -->
+
+    <div id="openInvitation">
+
+        <div class="open-heart">
+            ♡
+        </div>
+
+        <div class="open-title">
+            Tap to Open
+        </div>
+
+        <div class="open-subtitle">
+            Press to begin the celebration
+        </div>
+
+        <div class="open-line"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MUSIC
+         ===================================================== -->
 
     <audio
         id="weddingMusic"
         loop
         preload="auto"
-        autoplay
     >
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
+
+    <!-- SOUND BUTTON -->
 
     <button
         id="snd"
         aria-label="Play or pause music"
         type="button"
     >
-        🔊
+        🔇
     </button>
 
+
+    <!-- SCROLL -->
 
     <div id="scr" class="cap">
         Scroll
@@ -1562,7 +1688,6 @@ rsvpForm.addEventListener('submit', function(e){
 
     rsvpSubmitted = true;
 
-
     rsvpButton.disabled = true;
 
     rsvpButton.textContent =
@@ -1619,6 +1744,88 @@ rsvpFrame.addEventListener('load', function(){
     },500);
 
 });
+
+
+/* =========================================================
+   MUSIC CONTROLLER
+   ========================================================= */
+
+const music = $('#weddingMusic');
+const soundButton = $('#snd');
+const openInvitation = $('#openInvitation');
+
+let musicStarted = false;
+
+
+/* Initial volume */
+
+music.volume = 0.55;
+
+
+/* Update sound button */
+
+function updateSoundButton(){
+
+    if(music.paused){
+
+        soundButton.textContent = '🔇';
+
+        soundButton.title = 'Play music';
+
+        soundButton.setAttribute(
+            'aria-label',
+            'Play music'
+        );
+
+    }else{
+
+        soundButton.textContent = '🔊';
+
+        soundButton.title = 'Pause music';
+
+        soundButton.setAttribute(
+            'aria-label',
+            'Pause music'
+        );
+
+    }
+
+}
+
+
+/* Play music */
+
+async function playMusic(){
+
+    try{
+
+        await music.play();
+
+        musicStarted = true;
+
+        updateSoundButton();
+
+        return true;
+
+    }catch(error){
+
+        console.warn(
+            'Music could not be played:',
+            error
+        );
+
+        updateSoundButton();
+
+        return false;
+
+    }
+
+}
+
+
+/* Initial state */
+
+updateSoundButton();
 
 
 /* =========================================================
@@ -1964,38 +2171,276 @@ function drawK(t){
 }
 
 
+/* Keep curtains completely closed */
+
 drawK(0);
 
 
-setTimeout(
-    () => {
+/* =========================================================
+   AUTO SCROLL
+   SPEED = 0.3 PX / FRAME
+   ========================================================= */
 
-        $('#hero').classList.add('open');
-
-        const t0 = performance.now();
-
-
-        (
-            function f(n){
-
-                const t =
-                    Math.min(
-                        1,
-                        (n-t0)/3000
-                    );
+let autoScrollStarted = false;
+let userInteracted = false;
 
 
-                drawK(t);
+/*
+ * Stop auto scroll only after
+ * the invitation has been opened.
+ */
+
+function stopAutoScroll(event){
+
+    if(!invitationOpened)
+        return;
 
 
-                if(t<1)
-                    requestAnimationFrame(f);
+    const target = event.target;
+
+
+    if(
+        target &&
+        typeof target.closest === 'function' &&
+        target.closest('#openInvitation')
+    ){
+
+        return;
+
+    }
+
+
+    userInteracted = true;
+
+}
+
+
+/* Mouse wheel */
+
+window.addEventListener(
+    'wheel',
+    stopAutoScroll,
+    {
+        passive:true
+    }
+);
+
+
+/* Touch */
+
+window.addEventListener(
+    'touchstart',
+    stopAutoScroll,
+    {
+        passive:true
+    }
+);
+
+
+/* Pointer */
+
+window.addEventListener(
+    'pointerdown',
+    stopAutoScroll,
+    {
+        passive:true
+    }
+);
+
+
+/* Keyboard */
+
+window.addEventListener(
+    'keydown',
+    stopAutoScroll
+);
+
+
+/* Start auto scroll */
+
+function startAutoScroll(){
+
+    if(
+        autoScrollStarted ||
+        userInteracted
+    ){
+
+        return;
+
+    }
+
+
+    autoScrollStarted = true;
+
+
+    let position = window.scrollY;
+
+
+    function scrollPage(){
+
+        if(userInteracted)
+            return;
+
+
+        position += 0.3;
+
+
+        window.scrollTo(
+            0,
+            position
+        );
+
+
+        const maxScroll =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+
+        if(position < maxScroll){
+
+            requestAnimationFrame(
+                scrollPage
+            );
+
+        }
+
+    }
+
+
+    requestAnimationFrame(
+        scrollPage
+    );
+
+}
+
+
+/* =========================================================
+   OPEN INVITATION
+   ========================================================= */
+
+let invitationOpened = false;
+
+
+function openInvitationNow(){
+
+    if(invitationOpened)
+        return;
+
+
+    invitationOpened = true;
+
+
+    /*
+     * Hide the Tap to Open screen
+     */
+
+    openInvitation.classList.add('hide');
+
+
+    /*
+     * Start music from the
+     * user's direct interaction.
+     */
+
+    playMusic();
+
+
+    /*
+     * Reveal the hero text
+     */
+
+    $('#hero').classList.add('open');
+
+
+    /*
+     * Open the curtains
+     */
+
+    const t0 = performance.now();
+
+
+    (
+        function animateCurtain(n){
+
+            const t =
+                Math.min(
+                    1,
+                    (n-t0)/3000
+                );
+
+
+            drawK(t);
+
+
+            if(t<1){
+
+                requestAnimationFrame(
+                    animateCurtain
+                );
 
             }
-        )(t0);
 
-    },
-    700
+        }
+    )(t0);
+
+
+    /*
+     * Start auto scroll after
+     * the curtain animation finishes.
+     */
+
+    setTimeout(
+        () => {
+
+            startAutoScroll();
+
+        },
+        3200
+    );
+
+}
+
+
+/*
+ * One pointer interaction is enough.
+ * It works on desktop and mobile and
+ * also gives the browser a user gesture
+ * for audio playback.
+ */
+
+openInvitation.addEventListener(
+    'pointerdown',
+    openInvitationNow,
+    {
+        passive:true
+    }
+);
+
+
+/* =========================================================
+   SOUND BUTTON
+   ========================================================= */
+
+soundButton.addEventListener(
+    'click',
+    async e => {
+
+        e.stopPropagation();
+
+
+        if(music.paused){
+
+            await playMusic();
+
+        }else{
+
+            music.pause();
+
+            updateSoundButton();
+
+        }
+
+    }
 );
 
 
@@ -2200,6 +2645,11 @@ $$('.d').forEach(
             go = 0;
         };
 
+
+        c.onpointercancel = () => {
+            go = 0;
+        };
+
     }
 );
 
@@ -2235,15 +2685,25 @@ function win(){
                 length:130
             },
             () => ({
+
                 x:innerWidth/2,
+
                 y:innerHeight*.45,
+
                 vx:(Math.random()-.5)*16,
+
                 vy:-Math.random()*15-3,
+
                 r:Math.random()*6,
+
                 w:6+Math.random()*12,
+
                 h:4+Math.random()*7,
+
                 k:Math.random()<.35,
+
                 c:cols[Math.random()*4|0]
+
             })
         );
 
@@ -2599,324 +3059,6 @@ setInterval(
 
     }
 )();
-
-
-/* =========================================================
-   MUSIC
-   ========================================================= */
-
-const music = $('#weddingMusic');
-const soundButton = $('#snd');
-
-
-/*
- * Initial volume
- */
-
-music.volume = 0.55;
-
-
-/*
- * Update button
- */
-
-function updateSoundButton(){
-
-    if(music.paused){
-
-        soundButton.textContent = '🔇';
-
-        soundButton.title = 'Play music';
-
-        soundButton.setAttribute(
-            'aria-label',
-            'Play music'
-        );
-
-    }else{
-
-        soundButton.textContent = '🔊';
-
-        soundButton.title = 'Pause music';
-
-        soundButton.setAttribute(
-            'aria-label',
-            'Pause music'
-        );
-
-    }
-
-}
-
-
-/*
- * Try to start music
- */
-
-async function playMusic(){
-
-    try{
-
-        await music.play();
-
-        updateSoundButton();
-
-        return true;
-
-    }catch(error){
-
-        /*
-         * Browser blocked autoplay.
-         * The first user interaction will try again.
-         */
-
-        updateSoundButton();
-
-        return false;
-
-    }
-
-}
-
-
-/*
- * Autoplay attempt when page loads
- */
-
-window.addEventListener(
-    'load',
-    () => {
-
-        /*
-         * Make sure the browser knows
-         * we want the audio to start.
-         */
-
-        music.load();
-
-        playMusic();
-
-    }
-);
-
-
-/*
- * Sound button
- */
-
-soundButton.addEventListener(
-    'click',
-    async e => {
-
-        /*
-         * Prevent this click from
-         * affecting other controls.
-         */
-
-        e.stopPropagation();
-
-
-        if(music.paused){
-
-            await playMusic();
-
-        }else{
-
-            music.pause();
-
-            updateSoundButton();
-
-        }
-
-    }
-);
-
-
-/*
- * If autoplay was blocked,
- * start music after first interaction.
- */
-
-let musicInteractionStarted = false;
-
-
-document.addEventListener(
-    'pointerdown',
-    async event => {
-
-        if(
-            musicInteractionStarted ||
-            event.target.closest('#snd')
-        ){
-
-            return;
-
-        }
-
-
-        musicInteractionStarted = true;
-
-
-        if(music.paused){
-
-            await playMusic();
-
-        }
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-/* =========================================================
-   AUTO SCROLL
-   SPEED = 0.3 PX / FRAME
-   ========================================================= */
-
-let autoScrollStarted = false;
-let userInteracted = false;
-
-
-/*
- * Stop auto scroll when
- * the user interacts with the page.
- */
-
-function stopAutoScroll(){
-
-    userInteracted = true;
-
-}
-
-
-/*
- * Mouse wheel
- */
-
-window.addEventListener(
-    'wheel',
-    stopAutoScroll,
-    {
-        passive:true
-    }
-);
-
-
-/*
- * Touch
- */
-
-window.addEventListener(
-    'touchstart',
-    stopAutoScroll,
-    {
-        passive:true
-    }
-);
-
-
-/*
- * Mouse / pointer click
- */
-
-window.addEventListener(
-    'pointerdown',
-    stopAutoScroll,
-    {
-        passive:true
-    }
-);
-
-
-/*
- * Keyboard
- */
-
-window.addEventListener(
-    'keydown',
-    stopAutoScroll
-);
-
-
-/*
- * Start auto scroll
- */
-
-function startAutoScroll(){
-
-    if(
-        autoScrollStarted ||
-        userInteracted
-    ){
-
-        return;
-
-    }
-
-
-    autoScrollStarted = true;
-
-
-    let position = window.scrollY;
-
-
-    function scrollPage(){
-
-        if(userInteracted)
-            return;
-
-
-        position += 0.3;
-
-
-        window.scrollTo(
-            0,
-            position
-        );
-
-
-        const maxScroll =
-            document.documentElement.scrollHeight -
-            window.innerHeight;
-
-
-        if(position < maxScroll){
-
-            requestAnimationFrame(
-                scrollPage
-            );
-
-        }
-
-    }
-
-
-    requestAnimationFrame(
-        scrollPage
-    );
-
-}
-
-
-/*
- * Start auto scroll after
- * curtain animation is finished.
- *
- * Curtain starts at 700ms
- * and lasts 3000ms.
- * Therefore ~4000ms is used.
- */
-
-setTimeout(
-    () => {
-
-        startAutoScroll();
-
-    },
-    4000
-);
 
 </script>
 
