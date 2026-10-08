@@ -293,6 +293,43 @@ p{
     background:rgba(40,15,10,.95)
 }
 
+/* =========================================================
+   AUTO SCROLL CONTROL BUTTON
+   ========================================================= */
+
+#scrollControl{
+    position:fixed;
+    right:16px;
+    bottom:18px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:0;
+    background:rgba(40,15,10,.85);
+    color:#fff;
+    cursor:pointer;
+    z-index:100;
+    font-size:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+    transition:
+        transform .2s ease,
+        background .2s ease;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none;
+    -webkit-user-select:none
+}
+
+#scrollControl:hover{
+    background:rgba(40,15,10,.95)
+}
+
+#scrollControl:active{
+    transform:scale(.88)
+}
+
 #scr{
     position:absolute;
     bottom:8px;
@@ -655,6 +692,14 @@ p{
         font-size:34px
     }
 
+    #scrollControl{
+        right:12px;
+        bottom:14px;
+        width:36px;
+        height:36px;
+        font-size:14px
+    }
+
 }
 </style>
 </head>
@@ -770,6 +815,20 @@ p{
     </div>
 
 </section>
+
+
+<!-- =========================================================
+     FIXED AUTO SCROLL CONTROL
+     ========================================================= -->
+
+<button
+    id="scrollControl"
+    aria-label="Pause auto scroll"
+    title="Pause auto scroll"
+    type="button"
+>
+    ⏸️
+</button>
 
 
 <!-- =========================================================
@@ -1446,7 +1505,7 @@ p{
             type="hidden"
             id="attendance"
             name="attendance"
-        >
+        />
 
 
         <div
@@ -2178,17 +2237,55 @@ drawK(0);
 
 /* =========================================================
    AUTO SCROLL
-   SPEED = 0.3 PX / FRAME
+   SPEED = 0.5 PX / FRAME
    ========================================================= */
 
+const scrollControl = $('#scrollControl');
+
 let autoScrollStarted = false;
+let autoScrollEnabled = true;
 let userInteracted = false;
+let scrollAnimationFrame = null;
 
 
-/*
- * Stop auto scroll only after
- * the invitation has been opened.
- */
+/* =========================================================
+   UPDATE SCROLL BUTTON
+   ========================================================= */
+
+function updateScrollButton(){
+
+    if(autoScrollEnabled){
+
+        scrollControl.textContent = '⏸️';
+
+        scrollControl.title =
+            'Pause auto scroll';
+
+        scrollControl.setAttribute(
+            'aria-label',
+            'Pause auto scroll'
+        );
+
+    }else{
+
+        scrollControl.textContent = '▶️';
+
+        scrollControl.title =
+            'Start auto scroll';
+
+        scrollControl.setAttribute(
+            'aria-label',
+            'Start auto scroll'
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   STOP AUTO SCROLL WHEN USER INTERACTS
+   ========================================================= */
 
 function stopAutoScroll(event){
 
@@ -2199,10 +2296,18 @@ function stopAutoScroll(event){
     const target = event.target;
 
 
+    /*
+     * Ignore the control button itself
+     * and the opening overlay.
+     */
+
     if(
         target &&
         typeof target.closest === 'function' &&
-        target.closest('#openInvitation')
+        (
+            target.closest('#scrollControl') ||
+            target.closest('#openInvitation')
+        )
     ){
 
         return;
@@ -2210,12 +2315,31 @@ function stopAutoScroll(event){
     }
 
 
+    autoScrollEnabled = false;
     userInteracted = true;
+
+
+    if(scrollAnimationFrame){
+
+        cancelAnimationFrame(
+            scrollAnimationFrame
+        );
+
+        scrollAnimationFrame = null;
+
+    }
+
+
+    autoScrollStarted = false;
+
+    updateScrollButton();
 
 }
 
 
-/* Mouse wheel */
+/* =========================================================
+   MOUSE WHEEL
+   ========================================================= */
 
 window.addEventListener(
     'wheel',
@@ -2226,7 +2350,9 @@ window.addEventListener(
 );
 
 
-/* Touch */
+/* =========================================================
+   TOUCH
+   ========================================================= */
 
 window.addEventListener(
     'touchstart',
@@ -2237,18 +2363,18 @@ window.addEventListener(
 );
 
 
-/* Pointer */
-
-window.addEventListener(
-    'pointerdown',
-    stopAutoScroll,
-    {
-        passive:true
-    }
-);
+/*
+ * IMPORTANT:
+ * No global pointerdown listener here.
+ *
+ * The opening screen uses pointerdown
+ * to start the invitation and music.
+ */
 
 
-/* Keyboard */
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
 
 window.addEventListener(
     'keydown',
@@ -2256,13 +2382,16 @@ window.addEventListener(
 );
 
 
-/* Start auto scroll */
+/* =========================================================
+   START AUTO SCROLL
+   ========================================================= */
 
 function startAutoScroll(){
 
     if(
+        !invitationOpened ||
         autoScrollStarted ||
-        userInteracted
+        !autoScrollEnabled
     ){
 
         return;
@@ -2271,6 +2400,7 @@ function startAutoScroll(){
 
 
     autoScrollStarted = true;
+    userInteracted = false;
 
 
     let position = window.scrollY;
@@ -2278,8 +2408,17 @@ function startAutoScroll(){
 
     function scrollPage(){
 
-        if(userInteracted)
+        if(
+            !autoScrollEnabled ||
+            userInteracted
+        ){
+
+            autoScrollStarted = false;
+            scrollAnimationFrame = null;
+
             return;
+
+        }
 
 
         position += 0.5;
@@ -2298,20 +2437,90 @@ function startAutoScroll(){
 
         if(position < maxScroll){
 
-            requestAnimationFrame(
-                scrollPage
-            );
+            scrollAnimationFrame =
+                requestAnimationFrame(
+                    scrollPage
+                );
+
+        }else{
+
+            autoScrollStarted = false;
+            scrollAnimationFrame = null;
 
         }
 
     }
 
 
-    requestAnimationFrame(
-        scrollPage
-    );
+    scrollAnimationFrame =
+        requestAnimationFrame(
+            scrollPage
+        );
 
 }
+
+
+/* =========================================================
+   SCROLL CONTROL BUTTON
+   ========================================================= */
+
+scrollControl.addEventListener(
+    'click',
+    function(e){
+
+        e.stopPropagation();
+
+
+        if(!invitationOpened)
+            return;
+
+
+        if(autoScrollEnabled){
+
+            /*
+             * PAUSE
+             */
+
+            autoScrollEnabled = false;
+            userInteracted = true;
+
+
+            if(scrollAnimationFrame){
+
+                cancelAnimationFrame(
+                    scrollAnimationFrame
+                );
+
+                scrollAnimationFrame = null;
+
+            }
+
+
+            autoScrollStarted = false;
+
+        }else{
+
+            /*
+             * RESUME
+             */
+
+            autoScrollEnabled = true;
+            userInteracted = false;
+
+            startAutoScroll();
+
+        }
+
+
+        updateScrollButton();
+
+    }
+);
+
+
+/* Initial button state */
+
+updateScrollButton();
 
 
 /* =========================================================
